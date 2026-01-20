@@ -27,12 +27,20 @@ function MyApp() {
     return promise;
   }
 
-  function updateList(person) { 
+  function updateList(person) 
+  { 
     postUser(person)
-      .then(() => setCharacters([...characters, person]))
-      .catch((error) => {
+    .then((res) => {
+      console.log("Response status:", res.status);
+      if (res.status === 201)
+      {
+        setCharacters([...characters, person])
+      }
+    })
+      .catch((error) => 
+        {
         console.log(error);
-      });
+        });
   }
 
   useEffect(() => {

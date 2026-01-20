@@ -1,7 +1,5 @@
 // src/Table.jsx
 
-// src/Table.jsx
-
 function TableHeader() {
     return (
       <thead>
@@ -46,4 +44,3 @@ function TableHeader() {
   }
   
   export default Table;
-  
