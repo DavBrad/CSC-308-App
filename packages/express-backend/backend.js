@@ -43,6 +43,23 @@ const users = {
   ]
 };
 
+const generateId = () => {
+  const letters = "abcdefghijklmnopqrstuvwxyz";
+  let result = "";
+  
+  // Generate 3 letters
+  for (let i = 0; i < 3; i++) {
+    result += letters[Math.floor(Math.random() * letters.length)];
+  }
+  
+  // Generate 3 numbers
+  for (let i = 0; i < 3; i++) {
+    result += Math.floor(Math.random() * 10);
+  }
+  
+  return result;
+};
+
 const findUserByName = (name) => {
   return users["users_list"].filter(
     (user) => user["name"] === name
@@ -78,16 +95,16 @@ app.delete("/users/:id", (req, res) => {
     res.status(404).send("Resource not found.");
   } else {
     deleteUserByID(id);
-    res.send();
+    res.status(204).send();
   }
 });
   
   
-
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
+  userToAdd.id = generateId();
   addUser(userToAdd);
-  res.status(201).send();
+  res.status(201).send(userToAdd);
 });
 
 
